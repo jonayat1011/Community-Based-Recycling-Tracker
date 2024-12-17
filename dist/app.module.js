@@ -21,6 +21,7 @@ const event_entity_1 = require("./entities/event.entity");
 const contribution_entity_1 = require("./entities/contribution.entity");
 const challenge_entity_1 = require("./entities/challenge.entity");
 const challenge_participation_entity_1 = require("./entities/challenge-participation.entity");
+const organization_module_1 = require("./organization/organization.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -36,7 +37,8 @@ exports.AppModule = AppModule = __decorate([
                 database: 'community_recycling',
                 entities: [user_entity_1.User, drive_entity_1.Drive, reward_entity_1.Reward, resource_entity_1.Resource, recycling_center_entity_1.RecyclingCenter, partnership_entity_1.Partnership, event_entity_1.Event, contribution_entity_1.Contribution, challenge_entity_1.Challenge, challenge_participation_entity_1.ChallengeParticipation],
                 synchronize: true,
-            })
+            }),
+            organization_module_1.OrganizationModule
         ],
         controllers: [app_controller_1.AppController,],
         providers: [app_service_1.AppService,],
