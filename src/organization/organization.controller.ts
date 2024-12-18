@@ -1,13 +1,19 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { OrganizationService } from './organization.service';
 import { CreateDriveDto } from './dtos/create-drive.dto';
 import { UpdateDriveDto } from './dtos/update-drive.dto';
 import { CreatePartnershipDto } from './dtos/create-partnership.dto';
 import { CreateResourceDto } from './dtos/create-resource.dto';
 import { UpdateResourceDto } from './dtos/update-resource.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { RoleGuard } from 'src/auth/roles.guard';
+import { Roles } from 'src/auth/roles.decorator';
+
+
 
 @Controller('organization')
-// @UseGuards(AuthGuard, RolesGuard) // Uncomment if authentication and role guards are needed
+@UseGuards(JwtAuthGuard, RoleGuard)
+@Roles('Organization')
 export class OrganizationController {
   constructor(private readonly organizationService: OrganizationService) {}
 
@@ -16,6 +22,7 @@ export class OrganizationController {
   // ================================
 
   @Get('drives/:orgId')
+  
   async getDrives(@Param('orgId', ParseIntPipe) orgId: number) {
     return this.organizationService.getDrives(orgId);
   }

@@ -15,6 +15,11 @@ import { Challenge } from './entities/challenge.entity';
 import { ChallengeParticipation } from './entities/challenge-participation.entity';
 import { OrganizationModule } from './organization/organization.module';
 
+import { UserService } from './user/user.service';
+import { UserModule } from './user/user.module';
+//import { RolesGuard } from './auth/roles.guard';
+import { AuthModule } from './auth/auth.module';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -27,8 +32,10 @@ import { OrganizationModule } from './organization/organization.module';
     entities: [User,Drive,Reward,Resource,RecyclingCenter,Partnership,Event,Contribution,Challenge,ChallengeParticipation],
     synchronize: true,
   }),
-    OrganizationModule],
+    OrganizationModule,
+    UserModule,
+    AuthModule],
   controllers: [AppController,],
-  providers: [AppService,],
+  providers: [AppService, UserService,],
 })
 export class AppModule {}

@@ -20,6 +20,9 @@ const update_drive_dto_1 = require("./dtos/update-drive.dto");
 const create_partnership_dto_1 = require("./dtos/create-partnership.dto");
 const create_resource_dto_1 = require("./dtos/create-resource.dto");
 const update_resource_dto_1 = require("./dtos/update-resource.dto");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const roles_guard_1 = require("../auth/roles.guard");
+const roles_decorator_1 = require("../auth/roles.decorator");
 let OrganizationController = class OrganizationController {
     constructor(organizationService) {
         this.organizationService = organizationService;
@@ -151,6 +154,8 @@ __decorate([
 ], OrganizationController.prototype, "deleteResource", null);
 exports.OrganizationController = OrganizationController = __decorate([
     (0, common_1.Controller)('organization'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RoleGuard),
+    (0, roles_decorator_1.Roles)('Organization'),
     __metadata("design:paramtypes", [organization_service_1.OrganizationService])
 ], OrganizationController);
 //# sourceMappingURL=organization.controller.js.map
