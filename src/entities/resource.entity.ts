@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { IsString, IsUrl, Length } from 'class-validator';
+import { User } from './user.entity';
 
 @Entity()
 export class Resource {
@@ -20,4 +21,7 @@ export class Resource {
   @Column({ nullable: true })
   @IsString({ message: 'Description must be a string' })
   description: string;
+
+  @ManyToOne(() => User, (user) => user)
+    user: User;
 }

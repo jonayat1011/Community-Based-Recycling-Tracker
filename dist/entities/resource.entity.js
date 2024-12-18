@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Resource = void 0;
 const typeorm_1 = require("typeorm");
 const class_validator_1 = require("class-validator");
+const user_entity_1 = require("./user.entity");
 let Resource = class Resource {
 };
 exports.Resource = Resource;
@@ -37,6 +38,10 @@ __decorate([
     (0, class_validator_1.IsString)({ message: 'Description must be a string' }),
     __metadata("design:type", String)
 ], Resource.prototype, "description", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user),
+    __metadata("design:type", user_entity_1.User)
+], Resource.prototype, "user", void 0);
 exports.Resource = Resource = __decorate([
     (0, typeorm_1.Entity)()
 ], Resource);
