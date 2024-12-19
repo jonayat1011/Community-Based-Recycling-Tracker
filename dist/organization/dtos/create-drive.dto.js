@@ -40,9 +40,4 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'End date is required' }),
     __metadata("design:type", Date)
 ], CreateDriveDto.prototype, "endDate", void 0);
-__decorate([
-    (0, class_validator_1.IsNumber)({}, { message: 'Organizer ID must be a number' }),
-    (0, class_validator_1.IsNotEmpty)({ message: 'Organizer ID is required' }),
-    __metadata("design:type", Number)
-], CreateDriveDto.prototype, "organizerId", void 0);
 //# sourceMappingURL=create-drive.dto.js.map

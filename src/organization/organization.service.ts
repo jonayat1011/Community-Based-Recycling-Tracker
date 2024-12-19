@@ -35,10 +35,17 @@ export class OrganizationService {
     return drives;
   }
 
-  async createDrive(createDriveDto: CreateDriveDto) {
-    const newDrive = this.driveRepository.create(createDriveDto);
-    return await this.driveRepository.save(newDrive);
+  async createDrive(user: { id: number; name: string }, createDriveDto: CreateDriveDto): Promise<Drive> {
+   
+    const drive = this.driveRepository.create(createDriveDto);
+  
+  
+    drive.organizer = { id: user.id } as any; 
+  
+  
+    return await this.driveRepository.save(drive);
   }
+  
 
   async updateDrive(id: number, updateDriveDto: UpdateDriveDto): Promise<Drive> {
     const drive = await this.driveRepository.findOne({ where: { id } });
@@ -71,8 +78,9 @@ export class OrganizationService {
     return partnerships;
   }
 
-  async createPartnership(createPartnershipDto: CreatePartnershipDto) {
+  async createPartnership(user: { id: number; name: string }, createPartnershipDto: CreatePartnershipDto) {
     const newPartnership = this.partnershipRepository.create(createPartnershipDto);
+    newPartnership.user={ id: user.id } as any;
     return await this.partnershipRepository.save(newPartnership);
   }
 
@@ -108,8 +116,9 @@ export class OrganizationService {
   }
 
   // Create a new resource
-  async createResource(createResourceDto: CreateResourceDto) {
+  async createResource(user: { id: number; name: string; }, createResourceDto: CreateResourceDto) {
     const newResource = this.resourceRepository.create(createResourceDto);
+    newResource.user={ id: user.id } as any;
     return await this.resourceRepository.save(newResource);
   }
 

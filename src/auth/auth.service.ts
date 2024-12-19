@@ -1,3 +1,4 @@
+
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
@@ -35,17 +36,17 @@ export class AuthService {
         throw new BadRequestException('Passwords do not match');
       }
 
-    // Check if email already exists
+  
     const existingUser = await this.userRepository.findOne({ where: { email } });
     if (existingUser) {
       throw new BadRequestException('Email already registered');
     }
 
-    // Hash the password
+    
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create and save the user
+    
     const user = this.userRepository.create({
       name,
       email,

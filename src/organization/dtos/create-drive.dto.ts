@@ -22,7 +22,5 @@ export class CreateDriveDto {
   @IsNotEmpty({ message: 'End date is required' })
   endDate: Date;
 
-  @IsNumber({}, { message: 'Organizer ID must be a number' })
-  @IsNotEmpty({ message: 'Organizer ID is required' })
-  organizerId: number;
+
 }

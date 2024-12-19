@@ -15,7 +15,5 @@ export class CreatePartnershipDto {
   @IsDate({ message: 'End date must be a valid date' })
   endDate: Date;
 
-  @IsNumber({}, { message: 'User ID must be a number' })
-  @IsNotEmpty({ message: 'User ID is required' })
-  userId: number;
+
 }

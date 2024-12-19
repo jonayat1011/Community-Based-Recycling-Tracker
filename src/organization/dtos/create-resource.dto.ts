@@ -14,7 +14,5 @@ export class CreateResourceDto {
   @IsString({ message: 'Description must be a string' })
   description?: string;
 
- @IsNumber({}, { message: 'User ID must be a number' })
- @IsNotEmpty({ message: 'User ID is required' })
- userId: number;
+
 }

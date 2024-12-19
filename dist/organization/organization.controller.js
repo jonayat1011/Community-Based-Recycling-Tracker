@@ -27,135 +27,171 @@ let OrganizationController = class OrganizationController {
     constructor(organizationService) {
         this.organizationService = organizationService;
     }
-    async getDrives(orgId) {
-        return this.organizationService.getDrives(orgId);
+    async getDrives(req) {
+        const user = req.user;
+        return this.organizationService.getDrives(user.id);
     }
-    async createDrive(createDriveDto) {
-        return this.organizationService.createDrive(createDriveDto);
+    async createDrive(createDriveDto, req) {
+        const user = req.user;
+        return this.organizationService.createDrive(user, createDriveDto);
     }
-    async updateDrive(id, updateDriveDto) {
-        return await this.organizationService.updateDrive(id, updateDriveDto);
+    async updateDrive(id, updateDriveDto, req) {
+        const user = req.user;
+        return this.organizationService.updateDrive(id, updateDriveDto);
     }
-    async deleteDrive(id) {
+    async deleteDrive(id, req) {
+        const user = req.user;
         return this.organizationService.deleteDrive(id);
     }
-    async getPartnerships(orgId) {
-        return this.organizationService.getPartnerships(orgId);
+    async getPartnerships(req) {
+        const user = req.user;
+        return this.organizationService.getPartnerships(user.id);
     }
-    async createPartnership(createPartnershipDto) {
-        return this.organizationService.createPartnership(createPartnershipDto);
+    async createPartnership(createPartnershipDto, req) {
+        const user = req.user;
+        return this.organizationService.createPartnership(user, createPartnershipDto);
     }
-    async updatePartnership(id, updatePartnershipDto) {
+    async updatePartnership(id, updatePartnershipDto, req) {
+        const user = req.user;
+        console.log(`User Info: ID = ${user.id}, Name = ${user.name}`);
         return this.organizationService.updatePartnership(id, updatePartnershipDto);
     }
-    async deletePartnership(id) {
+    async deletePartnership(id, req) {
+        const user = req.user;
+        console.log(`User Info: ID = ${user.id}, Name = ${user.name}`);
         return this.organizationService.deletePartnership(id);
     }
-    async getResources(orgId) {
-        return this.organizationService.getResources(orgId);
+    async getResources(req) {
+        const user = req.user;
+        return this.organizationService.getResources(user.id);
     }
-    async createResource(createResourceDto) {
-        return this.organizationService.createResource(createResourceDto);
+    async createResource(createResourceDto, req) {
+        const user = req.user;
+        return this.organizationService.createResource(user, createResourceDto);
     }
-    async updateResource(id, updateResourceDto) {
+    async updateResource(id, updateResourceDto, req) {
+        const user = req.user;
+        console.log(`User Info: ID = ${user.id}, Name = ${user.name}`);
         return this.organizationService.updateResource(id, updateResourceDto);
     }
-    async deleteResource(id) {
+    async deleteResource(id, req) {
+        const user = req.user;
+        console.log(`User Info: ID = ${user.id}, Name = ${user.name}`);
         return this.organizationService.deleteResource(id);
     }
 };
 exports.OrganizationController = OrganizationController;
 __decorate([
-    (0, common_1.Get)('drives/:orgId'),
-    __param(0, (0, common_1.Param)('orgId', common_1.ParseIntPipe)),
+    (0, common_1.Get)('drives'),
+    (0, roles_decorator_1.Roles)('Organization'),
+    __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "getDrives", null);
 __decorate([
     (0, common_1.Post)('drives'),
+    (0, roles_decorator_1.Roles)('Organization'),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_drive_dto_1.CreateDriveDto]),
+    __metadata("design:paramtypes", [create_drive_dto_1.CreateDriveDto, Object]),
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "createDrive", null);
 __decorate([
     (0, common_1.Patch)('drives/:id'),
+    (0, roles_decorator_1.Roles)('Organization'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, update_drive_dto_1.UpdateDriveDto]),
+    __metadata("design:paramtypes", [Number, update_drive_dto_1.UpdateDriveDto, Object]),
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "updateDrive", null);
 __decorate([
     (0, common_1.Delete)('drives/:id'),
+    (0, roles_decorator_1.Roles)('Organization'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "deleteDrive", null);
 __decorate([
-    (0, common_1.Get)('partnerships/:orgId'),
-    __param(0, (0, common_1.Param)('orgId', common_1.ParseIntPipe)),
+    (0, common_1.Get)('partnerships'),
+    (0, roles_decorator_1.Roles)('Organization'),
+    __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "getPartnerships", null);
 __decorate([
     (0, common_1.Post)('partnerships'),
+    (0, roles_decorator_1.Roles)('Organization'),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_partnership_dto_1.CreatePartnershipDto]),
+    __metadata("design:paramtypes", [create_partnership_dto_1.CreatePartnershipDto, Object]),
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "createPartnership", null);
 __decorate([
     (0, common_1.Patch)('partnerships/:id'),
+    (0, roles_decorator_1.Roles)('Organization'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, create_partnership_dto_1.CreatePartnershipDto]),
+    __metadata("design:paramtypes", [Number, create_partnership_dto_1.CreatePartnershipDto, Object]),
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "updatePartnership", null);
 __decorate([
     (0, common_1.Delete)('partnerships/:id'),
+    (0, roles_decorator_1.Roles)('Organization'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "deletePartnership", null);
 __decorate([
-    (0, common_1.Get)('resources/:orgId'),
-    __param(0, (0, common_1.Param)('orgId', common_1.ParseIntPipe)),
+    (0, common_1.Get)('resources'),
+    (0, roles_decorator_1.Roles)('Organization'),
+    __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "getResources", null);
 __decorate([
     (0, common_1.Post)('resources'),
+    (0, roles_decorator_1.Roles)('Organization'),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_resource_dto_1.CreateResourceDto]),
+    __metadata("design:paramtypes", [create_resource_dto_1.CreateResourceDto, Object]),
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "createResource", null);
 __decorate([
     (0, common_1.Patch)('resources/:id'),
+    (0, roles_decorator_1.Roles)('Organization'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, update_resource_dto_1.UpdateResourceDto]),
+    __metadata("design:paramtypes", [Number, update_resource_dto_1.UpdateResourceDto, Object]),
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "updateResource", null);
 __decorate([
     (0, common_1.Delete)('resources/:id'),
+    (0, roles_decorator_1.Roles)('Organization'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "deleteResource", null);
 exports.OrganizationController = OrganizationController = __decorate([
     (0, common_1.Controller)('organization'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RoleGuard),
-    (0, roles_decorator_1.Roles)('Organization'),
     __metadata("design:paramtypes", [organization_service_1.OrganizationService])
 ], OrganizationController);
 //# sourceMappingURL=organization.controller.js.map

@@ -13,19 +13,28 @@ export declare class OrganizationService {
     private readonly resourceRepository;
     constructor(driveRepository: Repository<Drive>, partnershipRepository: Repository<Partnership>, resourceRepository: Repository<Resource>);
     getDrives(orgId: number): Promise<Drive[]>;
-    createDrive(createDriveDto: CreateDriveDto): Promise<Drive>;
+    createDrive(user: {
+        id: number;
+        name: string;
+    }, createDriveDto: CreateDriveDto): Promise<Drive>;
     updateDrive(id: number, updateDriveDto: UpdateDriveDto): Promise<Drive>;
     deleteDrive(id: number): Promise<{
         message: string;
     }>;
     getPartnerships(orgId: number): Promise<Partnership[]>;
-    createPartnership(createPartnershipDto: CreatePartnershipDto): Promise<Partnership>;
+    createPartnership(user: {
+        id: number;
+        name: string;
+    }, createPartnershipDto: CreatePartnershipDto): Promise<Partnership>;
     updatePartnership(id: number, updatePartnershipDto: CreatePartnershipDto): Promise<Partnership>;
     deletePartnership(id: number): Promise<{
         message: string;
     }>;
     getResources(orgId: number): Promise<Resource[]>;
-    createResource(createResourceDto: CreateResourceDto): Promise<Resource>;
+    createResource(user: {
+        id: number;
+        name: string;
+    }, createResourceDto: CreateResourceDto): Promise<Resource>;
     updateResource(id: number, updateResourceDto: UpdateResourceDto): Promise<Resource>;
     deleteResource(id: number): Promise<{
         message: string;

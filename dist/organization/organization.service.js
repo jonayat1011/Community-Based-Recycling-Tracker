@@ -32,9 +32,10 @@ let OrganizationService = class OrganizationService {
         }
         return drives;
     }
-    async createDrive(createDriveDto) {
-        const newDrive = this.driveRepository.create(createDriveDto);
-        return await this.driveRepository.save(newDrive);
+    async createDrive(user, createDriveDto) {
+        const drive = this.driveRepository.create(createDriveDto);
+        drive.organizer = { id: user.id };
+        return await this.driveRepository.save(drive);
     }
     async updateDrive(id, updateDriveDto) {
         const drive = await this.driveRepository.findOne({ where: { id } });
@@ -59,8 +60,9 @@ let OrganizationService = class OrganizationService {
         }
         return partnerships;
     }
-    async createPartnership(createPartnershipDto) {
+    async createPartnership(user, createPartnershipDto) {
         const newPartnership = this.partnershipRepository.create(createPartnershipDto);
+        newPartnership.user = { id: user.id };
         return await this.partnershipRepository.save(newPartnership);
     }
     async updatePartnership(id, updatePartnershipDto) {
@@ -86,8 +88,9 @@ let OrganizationService = class OrganizationService {
         }
         return resources;
     }
-    async createResource(createResourceDto) {
+    async createResource(user, createResourceDto) {
         const newResource = this.resourceRepository.create(createResourceDto);
+        newResource.user = { id: user.id };
         return await this.resourceRepository.save(newResource);
     }
     async updateResource(id, updateResourceDto) {

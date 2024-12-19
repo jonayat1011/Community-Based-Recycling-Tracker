@@ -30,9 +30,4 @@ __decorate([
     (0, class_validator_1.IsString)({ message: 'Description must be a string' }),
     __metadata("design:type", String)
 ], CreateResourceDto.prototype, "description", void 0);
-__decorate([
-    (0, class_validator_1.IsNumber)({}, { message: 'User ID must be a number' }),
-    (0, class_validator_1.IsNotEmpty)({ message: 'User ID is required' }),
-    __metadata("design:type", Number)
-], CreateResourceDto.prototype, "userId", void 0);
 //# sourceMappingURL=create-resource.dto.js.map

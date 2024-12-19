@@ -4,5 +4,4 @@ export declare class CreateDriveDto {
     location: string;
     startDate: Date;
     endDate: Date;
-    organizerId: number;
 }
