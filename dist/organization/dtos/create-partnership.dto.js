@@ -31,4 +31,9 @@ __decorate([
     (0, class_validator_1.IsDate)({ message: 'End date must be a valid date' }),
     __metadata("design:type", Date)
 ], CreatePartnershipDto.prototype, "endDate", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)({ message: 'Guest user ID is required' }),
+    (0, class_validator_1.IsNumber)({}, { message: 'Guest user ID must be a number' }),
+    __metadata("design:type", Number)
+], CreatePartnershipDto.prototype, "guestUserId", void 0);
 //# sourceMappingURL=create-partnership.dto.js.map

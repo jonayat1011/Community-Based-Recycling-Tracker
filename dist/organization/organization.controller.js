@@ -79,6 +79,10 @@ let OrganizationController = class OrganizationController {
         console.log(`User Info: ID = ${user.id}, Name = ${user.name}`);
         return this.organizationService.deleteResource(id);
     }
+    async getNotifications(req) {
+        const user = req.user;
+        return this.organizationService.getNotifications(user.id);
+    }
 };
 exports.OrganizationController = OrganizationController;
 __decorate([
@@ -189,6 +193,14 @@ __decorate([
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "deleteResource", null);
+__decorate([
+    (0, common_1.Get)('notification'),
+    (0, roles_decorator_1.Roles)('Organization'),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], OrganizationController.prototype, "getNotifications", null);
 exports.OrganizationController = OrganizationController = __decorate([
     (0, common_1.Controller)('organization'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RoleGuard),

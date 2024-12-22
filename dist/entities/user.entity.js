@@ -16,6 +16,7 @@ const drive_entity_1 = require("./drive.entity");
 const partnership_entity_1 = require("./partnership.entity");
 const contribution_entity_1 = require("./contribution.entity");
 const event_entity_1 = require("./event.entity");
+const notification_entity_1 = require("./notification.entity");
 let User = class User {
 };
 exports.User = User;
@@ -57,7 +58,7 @@ __decorate([
     __metadata("design:type", Array)
 ], User.prototype, "drives", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => partnership_entity_1.Partnership, (partnership) => partnership.user),
+    (0, typeorm_1.OneToMany)(() => partnership_entity_1.Partnership, (partnership) => partnership.hostUser),
     __metadata("design:type", Array)
 ], User.prototype, "partnerships", void 0);
 __decorate([
@@ -68,6 +69,10 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => event_entity_1.Event, (event) => event.organizer),
     __metadata("design:type", Array)
 ], User.prototype, "events", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => notification_entity_1.Notification, (notification) => notification.fromUser),
+    __metadata("design:type", Array)
+], User.prototype, "notifications", void 0);
 exports.User = User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);

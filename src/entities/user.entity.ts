@@ -4,6 +4,7 @@ import { Drive } from './drive.entity';
 import { Partnership } from './partnership.entity';
 import { Contribution } from './contribution.entity';
 import { Event } from './event.entity';
+import { Notification } from './notification.entity';
 
 @Entity()
 export class User {
@@ -37,7 +38,7 @@ export class User {
   @OneToMany(() => Drive, (drive) => drive.organizer)
   drives: Drive[];
 
-  @OneToMany(() => Partnership, (partnership) => partnership.user)
+  @OneToMany(() => Partnership, (partnership) => partnership.hostUser)
   partnerships: Partnership[];
 
   @OneToMany(() => Contribution, (contribution) => contribution.contributor)
@@ -45,4 +46,7 @@ export class User {
 
   @OneToMany(() => Event, (event) => event.organizer)
   events: Event[];
+
+  @OneToMany(() => Notification, (notification) => notification.fromUser)
+  notifications: Notification[];
 }

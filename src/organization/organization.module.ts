@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Drive } from 'src/entities/drive.entity';
 import { Partnership } from 'src/entities/partnership.entity';
 import { Resource } from 'src/entities/resource.entity';
+import { Notification} from 'src/entities/notification.entity';
 
 
 @Module({
@@ -12,7 +13,8 @@ import { Resource } from 'src/entities/resource.entity';
     TypeOrmModule.forFeature([
       Drive,
       Partnership,
-      Resource, 
+      Resource,
+      Notification,
     ]),
   ],
   providers: [OrganizationService],

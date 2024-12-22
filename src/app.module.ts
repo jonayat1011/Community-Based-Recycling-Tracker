@@ -12,6 +12,7 @@ import { Partnership } from './entities/partnership.entity';
 import { Event } from './entities/event.entity';
 import { Contribution } from './entities/contribution.entity';
 import { Challenge } from './entities/challenge.entity';
+import { Notification } from './entities/notification.entity';
 import { ChallengeParticipation } from './entities/challenge-participation.entity';
 import { OrganizationModule } from './organization/organization.module';
 
@@ -29,7 +30,7 @@ import { AuthModule } from './auth/auth.module';
     username: 'postgres',
     password: '@1545',
     database: 'community_recycling',
-    entities: [User,Drive,Reward,Resource,RecyclingCenter,Partnership,Event,Contribution,Challenge,ChallengeParticipation],
+    entities: [User,Drive,Reward,Resource,RecyclingCenter,Partnership,Event,Contribution,Challenge,ChallengeParticipation,Notification],
     synchronize: true,
   }),
     OrganizationModule,

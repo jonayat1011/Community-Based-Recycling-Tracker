@@ -26,4 +26,5 @@ export declare class OrganizationController {
     deleteResource(id: number, req: Request): Promise<{
         message: string;
     }>;
+    getNotifications(req: Request): Promise<import("../entities/notification.entity").Notification[]>;
 }

@@ -2,6 +2,7 @@ import { Drive } from './drive.entity';
 import { Partnership } from './partnership.entity';
 import { Contribution } from './contribution.entity';
 import { Event } from './event.entity';
+import { Notification } from './notification.entity';
 export declare class User {
     id: number;
     name: string;
@@ -13,4 +14,5 @@ export declare class User {
     partnerships: Partnership[];
     contributions: Contribution[];
     events: Event[];
+    notifications: Notification[];
 }

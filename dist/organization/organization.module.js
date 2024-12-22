@@ -14,6 +14,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const drive_entity_1 = require("../entities/drive.entity");
 const partnership_entity_1 = require("../entities/partnership.entity");
 const resource_entity_1 = require("../entities/resource.entity");
+const notification_entity_1 = require("../entities/notification.entity");
 let OrganizationModule = class OrganizationModule {
 };
 exports.OrganizationModule = OrganizationModule;
@@ -24,6 +25,7 @@ exports.OrganizationModule = OrganizationModule = __decorate([
                 drive_entity_1.Drive,
                 partnership_entity_1.Partnership,
                 resource_entity_1.Resource,
+                notification_entity_1.Notification,
             ]),
         ],
         providers: [organization_service_1.OrganizationService],

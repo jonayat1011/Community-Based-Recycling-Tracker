@@ -144,5 +144,18 @@ import {
       console.log(`User Info: ID = ${user.id}, Name = ${user.name}`);
       return this.organizationService.deleteResource(id);
     }
+
+    // ================================
+    // Notification Endpoints
+    // ================================
+    @Get('notification')
+    @Roles('Organization')
+    async getNotifications( @Req() req: Request) {
+      const user = req.user as { id: number; name: string }; 
+      
+      return this.organizationService.getNotifications(user.id);
+    }
+
+
   }
   

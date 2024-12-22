@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 import { IsDate, IsString, Length } from 'class-validator';
 import { User } from './user.entity';
+import { Drive } from './drive.entity';
 
 @Entity()
 export class Event {
@@ -28,4 +29,8 @@ export class Event {
 
   @ManyToOne(() => User, (user) => user.events)
   organizer: User;
+
+  @OneToOne(() => Drive, (drive) => drive.event)
+  @JoinColumn()  // Ensure a column is created for the relationship
+  drive: Drive;
 }

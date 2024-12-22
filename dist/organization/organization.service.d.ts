@@ -1,17 +1,20 @@
+import { Repository } from 'typeorm';
+import { Notification } from 'src/entities/notification.entity';
 import { Drive } from 'src/entities/drive.entity';
 import { Partnership } from 'src/entities/partnership.entity';
 import { Resource } from 'src/entities/resource.entity';
-import { Repository } from 'typeorm';
 import { CreateDriveDto } from './dtos/create-drive.dto';
 import { UpdateDriveDto } from './dtos/update-drive.dto';
 import { CreatePartnershipDto } from './dtos/create-partnership.dto';
+import { UpdatePartnershipDto } from './dtos/update-partnership.dto';
 import { CreateResourceDto } from './dtos/create-resource.dto';
 import { UpdateResourceDto } from './dtos/update-resource.dto';
 export declare class OrganizationService {
     private readonly driveRepository;
     private readonly partnershipRepository;
+    private readonly notificationRepository;
     private readonly resourceRepository;
-    constructor(driveRepository: Repository<Drive>, partnershipRepository: Repository<Partnership>, resourceRepository: Repository<Resource>);
+    constructor(driveRepository: Repository<Drive>, partnershipRepository: Repository<Partnership>, notificationRepository: Repository<Notification>, resourceRepository: Repository<Resource>);
     getDrives(orgId: number): Promise<Drive[]>;
     createDrive(user: {
         id: number;
@@ -26,7 +29,7 @@ export declare class OrganizationService {
         id: number;
         name: string;
     }, createPartnershipDto: CreatePartnershipDto): Promise<Partnership>;
-    updatePartnership(id: number, updatePartnershipDto: CreatePartnershipDto): Promise<Partnership>;
+    updatePartnership(id: number, updatePartnershipDto: UpdatePartnershipDto): Promise<Partnership>;
     deletePartnership(id: number): Promise<{
         message: string;
     }>;
@@ -39,4 +42,5 @@ export declare class OrganizationService {
     deleteResource(id: number): Promise<{
         message: string;
     }>;
+    getNotifications(orgId: number): Promise<Notification[]>;
 }

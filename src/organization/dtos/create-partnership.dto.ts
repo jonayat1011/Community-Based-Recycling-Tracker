@@ -1,4 +1,5 @@
 import { IsString, Length, IsDate, IsNotEmpty, IsNumber } from 'class-validator';
+import { User } from 'src/entities/user.entity';
 
 export class CreatePartnershipDto {
   @IsString()
@@ -15,5 +16,8 @@ export class CreatePartnershipDto {
   @IsDate({ message: 'End date must be a valid date' })
   endDate: Date;
 
-
+  @IsNotEmpty({ message: 'Guest user ID is required' })
+  @IsNumber({}, { message: 'Guest user ID must be a number' })
+  guestUserId: number;
+  partnerId: any;
 }

@@ -15,14 +15,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrganizationService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const typeorm_2 = require("typeorm");
+const notification_entity_1 = require("../entities/notification.entity");
 const drive_entity_1 = require("../entities/drive.entity");
 const partnership_entity_1 = require("../entities/partnership.entity");
 const resource_entity_1 = require("../entities/resource.entity");
-const typeorm_2 = require("typeorm");
 let OrganizationService = class OrganizationService {
-    constructor(driveRepository, partnershipRepository, resourceRepository) {
+    constructor(driveRepository, partnershipRepository, notificationRepository, resourceRepository) {
         this.driveRepository = driveRepository;
         this.partnershipRepository = partnershipRepository;
+        this.notificationRepository = notificationRepository;
         this.resourceRepository = resourceRepository;
     }
     async getDrives(orgId) {
@@ -35,7 +37,14 @@ let OrganizationService = class OrganizationService {
     async createDrive(user, createDriveDto) {
         const drive = this.driveRepository.create(createDriveDto);
         drive.organizer = { id: user.id };
-        return await this.driveRepository.save(drive);
+        const savedDrive = await this.driveRepository.save(drive);
+        await this.notificationRepository.save({
+            message: `New Event Request: ${createDriveDto.title}`,
+            type: notification_entity_1.NotificationType.EventRequest,
+            fromUser: { id: user.id },
+            entityId: savedDrive.id,
+        });
+        return savedDrive;
     }
     async updateDrive(id, updateDriveDto) {
         const drive = await this.driveRepository.findOne({ where: { id } });
@@ -54,7 +63,7 @@ let OrganizationService = class OrganizationService {
         return { message: 'Drive deleted successfully' };
     }
     async getPartnerships(orgId) {
-        const partnerships = await this.partnershipRepository.find({ where: { user: { id: orgId } } });
+        const partnerships = await this.partnershipRepository.find({ where: { hostUser: { id: orgId } } });
         if (!partnerships.length) {
             throw new common_1.NotFoundException('No partnerships found for this organization');
         }
@@ -62,8 +71,15 @@ let OrganizationService = class OrganizationService {
     }
     async createPartnership(user, createPartnershipDto) {
         const newPartnership = this.partnershipRepository.create(createPartnershipDto);
-        newPartnership.user = { id: user.id };
-        return await this.partnershipRepository.save(newPartnership);
+        newPartnership.hostUser = { id: user.id };
+        const savedPartnership = await this.partnershipRepository.save(newPartnership);
+        await this.notificationRepository.save({
+            message: `Partnership request sent to ${createPartnershipDto.partnerName}`,
+            type: notification_entity_1.NotificationType.PartnershipRequest,
+            fromUser: { id: user.id },
+            entityId: savedPartnership.id,
+        });
+        return savedPartnership;
     }
     async updatePartnership(id, updatePartnershipDto) {
         const partnership = await this.partnershipRepository.findOne({ where: { id } });
@@ -91,7 +107,8 @@ let OrganizationService = class OrganizationService {
     async createResource(user, createResourceDto) {
         const newResource = this.resourceRepository.create(createResourceDto);
         newResource.user = { id: user.id };
-        return await this.resourceRepository.save(newResource);
+        const savedResource = await this.resourceRepository.save(newResource);
+        return savedResource;
     }
     async updateResource(id, updateResourceDto) {
         const resource = await this.resourceRepository.findOne({ where: { id } });
@@ -109,14 +126,28 @@ let OrganizationService = class OrganizationService {
         await this.resourceRepository.remove(resource);
         return { message: 'Resource deleted successfully' };
     }
+    async getNotifications(orgId) {
+        const notifications = await this.notificationRepository.find({
+            where: {
+                type: (0, typeorm_2.In)([notification_entity_1.NotificationType.PartnershipRequest, notification_entity_1.NotificationType.NewEvent, notification_entity_1.NotificationType.PartnershipConfirmed]),
+                fromUser: { id: orgId },
+            },
+        });
+        if (!notifications.length) {
+            throw new common_1.NotFoundException('No notifications found for this organization');
+        }
+        return notifications;
+    }
 };
 exports.OrganizationService = OrganizationService;
 exports.OrganizationService = OrganizationService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(drive_entity_1.Drive)),
     __param(1, (0, typeorm_1.InjectRepository)(partnership_entity_1.Partnership)),
-    __param(2, (0, typeorm_1.InjectRepository)(resource_entity_1.Resource)),
+    __param(2, (0, typeorm_1.InjectRepository)(notification_entity_1.Notification)),
+    __param(3, (0, typeorm_1.InjectRepository)(resource_entity_1.Resource)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository,
         typeorm_2.Repository,
         typeorm_2.Repository])
 ], OrganizationService);

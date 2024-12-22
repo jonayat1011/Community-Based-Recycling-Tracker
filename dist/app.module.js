@@ -20,6 +20,7 @@ const partnership_entity_1 = require("./entities/partnership.entity");
 const event_entity_1 = require("./entities/event.entity");
 const contribution_entity_1 = require("./entities/contribution.entity");
 const challenge_entity_1 = require("./entities/challenge.entity");
+const notification_entity_1 = require("./entities/notification.entity");
 const challenge_participation_entity_1 = require("./entities/challenge-participation.entity");
 const organization_module_1 = require("./organization/organization.module");
 const user_service_1 = require("./user/user.service");
@@ -38,7 +39,7 @@ exports.AppModule = AppModule = __decorate([
                 username: 'postgres',
                 password: '@1545',
                 database: 'community_recycling',
-                entities: [user_entity_1.User, drive_entity_1.Drive, reward_entity_1.Reward, resource_entity_1.Resource, recycling_center_entity_1.RecyclingCenter, partnership_entity_1.Partnership, event_entity_1.Event, contribution_entity_1.Contribution, challenge_entity_1.Challenge, challenge_participation_entity_1.ChallengeParticipation],
+                entities: [user_entity_1.User, drive_entity_1.Drive, reward_entity_1.Reward, resource_entity_1.Resource, recycling_center_entity_1.RecyclingCenter, partnership_entity_1.Partnership, event_entity_1.Event, contribution_entity_1.Contribution, challenge_entity_1.Challenge, challenge_participation_entity_1.ChallengeParticipation, notification_entity_1.Notification],
                 synchronize: true,
             }),
             organization_module_1.OrganizationModule,

@@ -13,6 +13,7 @@ exports.Event = void 0;
 const typeorm_1 = require("typeorm");
 const class_validator_1 = require("class-validator");
 const user_entity_1 = require("./user.entity");
+const drive_entity_1 = require("./drive.entity");
 let Event = class Event {
 };
 exports.Event = Event;
@@ -47,6 +48,11 @@ __decorate([
     (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.events),
     __metadata("design:type", user_entity_1.User)
 ], Event.prototype, "organizer", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(() => drive_entity_1.Drive, (drive) => drive.event),
+    (0, typeorm_1.JoinColumn)(),
+    __metadata("design:type", drive_entity_1.Drive)
+], Event.prototype, "drive", void 0);
 exports.Event = Event = __decorate([
     (0, typeorm_1.Entity)()
 ], Event);

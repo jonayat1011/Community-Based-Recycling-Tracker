@@ -1,6 +1,16 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 import { IsDate, IsString, Length } from 'class-validator';
 import { User } from './user.entity';
+import { Partnership } from './partnership.entity';
+import { Event } from './event.entity';
+
+// Enum for Drive status
+export enum DriveStatus {
+  PENDING = 'pending',
+  ONGOING = 'ongoing',
+  COMPLETED = 'completed',
+  DECLINED = 'declined',
+}
 
 @Entity()
 export class Drive {
@@ -30,4 +40,18 @@ export class Drive {
 
   @ManyToOne(() => User, (user) => user.drives)
   organizer: User;
+
+  @ManyToOne(() => Partnership, (partnership) => partnership.drives)
+  Partners: Partnership;
+
+  @Column({
+    type: 'enum',
+    enum: DriveStatus,
+    default: DriveStatus.PENDING,
+  })
+  status: DriveStatus;
+
+  @OneToOne(() => Event, (event) => event.drive)
+  @JoinColumn()  // Ensure a column is created for the relationship
+  event: Event;
 }

@@ -1,6 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { IsDate, IsString, Length } from 'class-validator';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+import { IsDate, IsString, Length, IsEnum } from 'class-validator';
 import { User } from './user.entity';
+import { Drive } from './drive.entity';
+
+// Enum for status
+export enum PartnershipStatus {
+  REQUESTING = 'requesting',
+  ACCEPTED = 'accepted',
+  CANCELLED = 'cancelled',
+}
 
 @Entity()
 export class Partnership {
@@ -23,5 +31,21 @@ export class Partnership {
   endDate: Date;
 
   @ManyToOne(() => User, (user) => user.partnerships)
-  user: User;
+  hostUser: User;
+  
+  @ManyToOne(() => User, (user) => user.partnerships)
+  guestUser: User;
+
+  @OneToMany(() => Drive, (drive) => drive.Partners)
+  drives: Drive[];
+
+  @Column({
+    type: 'enum',
+    enum: PartnershipStatus,
+    default: PartnershipStatus.REQUESTING,
+  })
+  @IsEnum(PartnershipStatus, {
+    message: 'Status must be one of: requesting, accepted, cancelled',
+  })
+  status: PartnershipStatus;
 }

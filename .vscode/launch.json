@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/jonayat/Documents/S-8/CG_P/CG_P",
+      "program": "/Users/jonayat/Documents/S-8/CG_P/CG_P/build/Debug/outDebug"
+    }
+  ]
+}
