@@ -1,32 +1,29 @@
-/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { RecyclerModule } from './recycler/recycler.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
-import { Drive } from './entities/drive.entity';
-import { Reward } from './entities/reward.entity';
-import { Resource } from './entities/resource.entity';
-import { RecyclingCenter } from './entities/recycling-center.entity';
-import { Partnership } from './entities/partnership.entity';
-import { Event } from './entities/event.entity';
-import { Contribution } from './entities/contribution.entity';
-import { Challenge } from './entities/challenge.entity';
-import { ChallengeParticipation } from './entities/challenge-participation.entity';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { UserService } from './user/user.service';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-    port: 5432,
-    username: 'postgres',
-    password: '@1545',
-    database: 'community_recycling',
-    entities: [User,Drive,Reward,Resource,RecyclingCenter,Partnership,Event,Contribution,Challenge,ChallengeParticipation],
-    synchronize: true,
-  })],
-  controllers: [AppController,],
-  providers: [AppService,],
+      port: 5432, 
+      username: 'postgres', 
+      password: 'root', // Change this to your PostgreSQL password
+      database: 'test2', // Change to your PostgreSQL database name
+      entities: [__dirname + '/**/*.entity{.ts,.js}'], // Path to your entities
+      synchronize: true, // Set to false in production
+    }),
+    RecyclerModule,
+    UserModule,
+    AuthModule // Your custom module
+  ],
+  controllers: [AppController],
+  providers: [AppService, UserService],
 })
 export class AppModule {}
