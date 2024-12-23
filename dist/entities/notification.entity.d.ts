@@ -12,6 +12,7 @@ export declare class Notification {
     type: NotificationType;
     entityId: number;
     fromUser: User;
+    toUser: User;
     isRead: boolean;
     createdAt: Date;
     expiryDate: Date;

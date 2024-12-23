@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 import { IsString, Length, IsNumber, IsUrl } from 'class-validator';
+import { Event } from './event.entity';
 
 @Entity()
 export class RecyclingCenter {
@@ -34,4 +35,8 @@ export class RecyclingCenter {
   @Column('float')
   @IsNumber({}, { message: 'Longitude must be a number' })
   longitude: number;
+
+  @OneToMany(() => Event, (event) => event.drive)
+  @JoinColumn()  // Ensure a column is created for the relationship
+  event: Event;
 }

@@ -5,6 +5,7 @@ import { Partnership } from './partnership.entity';
 import { Contribution } from './contribution.entity';
 import { Event } from './event.entity';
 import { Notification } from './notification.entity';
+import { EventRegistration } from './event-registration.entity';
 
 @Entity()
 export class User {
@@ -49,4 +50,7 @@ export class User {
 
   @OneToMany(() => Notification, (notification) => notification.fromUser)
   notifications: Notification[];
+
+  @OneToMany(() => EventRegistration, (registration) => registration.user)
+  eventRegistrations: EventRegistration[];
 }

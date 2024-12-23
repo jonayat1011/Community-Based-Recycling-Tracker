@@ -11,6 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateDriveDto = void 0;
 const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
+const custom_date_validators_1 = require("../custom-date-validators");
 class CreateDriveDto {
 }
 exports.CreateDriveDto = CreateDriveDto;
@@ -33,11 +35,17 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsDate)({ message: 'Start date must be a valid date' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'Start date is required' }),
+    (0, class_transformer_1.Type)(() => Date),
+    (0, class_validator_1.Validate)(custom_date_validators_1.StartDateValidation, { message: 'Start date must be at least 7 days from today' }),
     __metadata("design:type", Date)
 ], CreateDriveDto.prototype, "startDate", void 0);
 __decorate([
     (0, class_validator_1.IsDate)({ message: 'End date must be a valid date' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'End date is required' }),
+    (0, class_transformer_1.Type)(() => Date),
+    (0, class_validator_1.Validate)(custom_date_validators_1.EndDateValidation, {
+        message: 'End date must be more than 2 days after the start date and less than 5 days',
+    }),
     __metadata("design:type", Date)
 ], CreateDriveDto.prototype, "endDate", void 0);
 //# sourceMappingURL=create-drive.dto.js.map

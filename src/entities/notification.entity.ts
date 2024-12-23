@@ -31,6 +31,9 @@ export class Notification {
   @ManyToOne(() => User, (user) => user.notifications)
   @Index()
   fromUser: User; // Sender of the notification
+  @ManyToOne(() => User, (user) => user.notifications)
+  @Index()
+  toUser: User; 
 
   @Column({ default: false })
   @Index()

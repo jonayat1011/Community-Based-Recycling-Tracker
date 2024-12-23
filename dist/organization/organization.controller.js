@@ -56,10 +56,20 @@ let OrganizationController = class OrganizationController {
         console.log(`User Info: ID = ${user.id}, Name = ${user.name}`);
         return this.organizationService.updatePartnership(id, updatePartnershipDto);
     }
+    async statusPartnership(id, updatePartnershipDto, req) {
+        const user = req.user;
+        console.log(`User Info: ID = ${user.id}, Name = ${user.name}`);
+        return this.organizationService.statusPartnership(id, updatePartnershipDto);
+    }
     async deletePartnership(id, req) {
         const user = req.user;
         console.log(`User Info: ID = ${user.id}, Name = ${user.name}`);
         return this.organizationService.deletePartnership(id);
+    }
+    async findPartners(req) {
+        const user = req.user;
+        console.log(`User Info: ID = ${user.id}, Name = ${user.name}`);
+        return this.organizationService.findPartners();
     }
     async getResources(req) {
         const user = req.user;
@@ -82,6 +92,10 @@ let OrganizationController = class OrganizationController {
     async getNotifications(req) {
         const user = req.user;
         return this.organizationService.getNotifications(user.id);
+    }
+    async getDashboard(req) {
+        const user = req.user;
+        return this.organizationService.getDashboard(user.id);
     }
 };
 exports.OrganizationController = OrganizationController;
@@ -149,6 +163,16 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "updatePartnership", null);
 __decorate([
+    (0, common_1.Patch)('partnerships-status/:id'),
+    (0, roles_decorator_1.Roles)('Organization'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, create_partnership_dto_1.CreatePartnershipDto, Object]),
+    __metadata("design:returntype", Promise)
+], OrganizationController.prototype, "statusPartnership", null);
+__decorate([
     (0, common_1.Delete)('partnerships/:id'),
     (0, roles_decorator_1.Roles)('Organization'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
@@ -157,6 +181,14 @@ __decorate([
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "deletePartnership", null);
+__decorate([
+    (0, common_1.Get)('partners'),
+    (0, roles_decorator_1.Roles)('Organization'),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], OrganizationController.prototype, "findPartners", null);
 __decorate([
     (0, common_1.Get)('resources'),
     (0, roles_decorator_1.Roles)('Organization'),
@@ -201,6 +233,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], OrganizationController.prototype, "getNotifications", null);
+__decorate([
+    (0, common_1.Get)('dashboard'),
+    (0, roles_decorator_1.Roles)('Organization'),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], OrganizationController.prototype, "getDashboard", null);
 exports.OrganizationController = OrganizationController = __decorate([
     (0, common_1.Controller)('organization'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RoleGuard),

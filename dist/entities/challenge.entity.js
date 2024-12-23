@@ -14,6 +14,7 @@ const typeorm_1 = require("typeorm");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
 const challenge_participation_entity_1 = require("./challenge-participation.entity");
+const event_entity_1 = require("./event.entity");
 let Challenge = class Challenge {
 };
 exports.Challenge = Challenge;
@@ -53,6 +54,11 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => challenge_participation_entity_1.ChallengeParticipation, (participation) => participation.challenge),
     __metadata("design:type", Array)
 ], Challenge.prototype, "participations", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => event_entity_1.Event, (event) => event.challenge),
+    (0, typeorm_1.JoinColumn)(),
+    __metadata("design:type", event_entity_1.Event)
+], Challenge.prototype, "event", void 0);
 exports.Challenge = Challenge = __decorate([
     (0, typeorm_1.Entity)()
 ], Challenge);

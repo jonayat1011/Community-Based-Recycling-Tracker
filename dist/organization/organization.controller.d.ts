@@ -17,9 +17,13 @@ export declare class OrganizationController {
     getPartnerships(req: Request): Promise<import("../entities/partnership.entity").Partnership[]>;
     createPartnership(createPartnershipDto: CreatePartnershipDto, req: Request): Promise<import("../entities/partnership.entity").Partnership>;
     updatePartnership(id: number, updatePartnershipDto: CreatePartnershipDto, req: Request): Promise<import("../entities/partnership.entity").Partnership>;
+    statusPartnership(id: number, updatePartnershipDto: CreatePartnershipDto, req: Request): Promise<import("../entities/partnership.entity").Partnership | {
+        message: string;
+    }>;
     deletePartnership(id: number, req: Request): Promise<{
         message: string;
     }>;
+    findPartners(req: Request): Promise<import("../entities/user.entity").User[]>;
     getResources(req: Request): Promise<import("../entities/resource.entity").Resource[]>;
     createResource(createResourceDto: CreateResourceDto, req: Request): Promise<import("../entities/resource.entity").Resource>;
     updateResource(id: number, updateResourceDto: UpdateResourceDto, req: Request): Promise<import("../entities/resource.entity").Resource>;
@@ -27,4 +31,13 @@ export declare class OrganizationController {
         message: string;
     }>;
     getNotifications(req: Request): Promise<import("../entities/notification.entity").Notification[]>;
+    getDashboard(req: Request): Promise<{
+        event: number;
+        drives: number;
+        partnerships: number;
+        resources: number;
+        MaterialQuantity: number;
+        registrations: number;
+        notifications: number;
+    }>;
 }

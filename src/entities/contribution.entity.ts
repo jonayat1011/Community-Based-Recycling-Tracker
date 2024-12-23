@@ -1,6 +1,14 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { IsString, IsNumber } from 'class-validator';
+import { IsString, IsNumber, IsEnum } from 'class-validator';
 import { User } from './user.entity';
+import { Event } from './event.entity';
+
+export enum Type {
+  Metalic = 'Metalic',
+  Plastic = 'Plastic',
+  Paper = 'Paper',
+
+}
 
 @Entity()
 export class Contribution {
@@ -8,8 +16,10 @@ export class Contribution {
   id: number;
 
   @Column()
-  @IsString({ message: 'Material type must be a string' })
-  materialType: string;
+  @IsEnum(Type, {
+      message: 'Invalid Material type',
+    })
+  materialType: Type;
 
   @Column('float')
   @IsNumber({}, { message: 'Quantity must be a number' })
@@ -17,4 +27,7 @@ export class Contribution {
 
   @ManyToOne(() => User, (user) => user.contributions)
   contributor: User;
+
+  @ManyToOne(() => Event, (event) => event.contributions)
+  event: Event;
 }

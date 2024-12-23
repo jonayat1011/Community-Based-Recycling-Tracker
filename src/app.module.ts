@@ -20,6 +20,8 @@ import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
 //import { RolesGuard } from './auth/roles.guard';
 import { AuthModule } from './auth/auth.module';
+import { EventRegistration } from './entities/event-registration.entity';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -30,12 +32,14 @@ import { AuthModule } from './auth/auth.module';
     username: 'postgres',
     password: '@1545',
     database: 'community_recycling',
-    entities: [User,Drive,Reward,Resource,RecyclingCenter,Partnership,Event,Contribution,Challenge,ChallengeParticipation,Notification],
+    entities: [User,Drive,Reward,Resource,RecyclingCenter,Partnership,Event,Contribution,Challenge,ChallengeParticipation,Notification,EventRegistration],
     synchronize: true,
   }),
     OrganizationModule,
     UserModule,
-    AuthModule],
+    AuthModule,
+    ScheduleModule.forRoot()
+  ],
   controllers: [AppController,],
   providers: [AppService, UserService,],
 })

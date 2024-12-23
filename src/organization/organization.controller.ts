@@ -29,7 +29,7 @@ import {
     constructor(private readonly organizationService: OrganizationService) {}
   
     // ================================
-    // Drives Endpoints
+    //            Drives 
     // ================================
     
     @Get('drives')
@@ -67,7 +67,7 @@ import {
     }
   
     // ================================
-    // Partnerships Endpoints
+    //          Partnerships 
     // ================================
   
     @Get('partnerships')
@@ -97,6 +97,19 @@ import {
       console.log(`User Info: ID = ${user.id}, Name = ${user.name}`);
       return this.organizationService.updatePartnership(id, updatePartnershipDto);
     }
+
+    @Patch('partnerships-status/:id')
+    @Roles('Organization')
+    async statusPartnership(
+      @Param('id', ParseIntPipe) id: number,
+      @Body() updatePartnershipDto: CreatePartnershipDto,
+      @Req() req: Request,
+    ) {
+      const user = req.user as { id: number; name: string };
+      console.log(`User Info: ID = ${user.id}, Name = ${user.name}`);
+      return this.organizationService.statusPartnership(id, updatePartnershipDto);
+    }
+  
   
     @Delete('partnerships/:id')
     @Roles('Organization')
@@ -105,9 +118,17 @@ import {
       console.log(`User Info: ID = ${user.id}, Name = ${user.name}`);
       return this.organizationService.deletePartnership(id);
     }
-  
+    @Get('partners')
+    @Roles('Organization')
+    async findPartners(@Req() req: Request) {
+      const user = req.user as { id: number; name: string };
+      console.log(`User Info: ID = ${user.id}, Name = ${user.name}`);
+    
+      return this.organizationService.findPartners();
+    }
+    
     // ================================
-    // Resources Endpoints
+    //         Resources 
     // ================================
   
     @Get('resources')
@@ -146,7 +167,7 @@ import {
     }
 
     // ================================
-    // Notification Endpoints
+    //          Notification 
     // ================================
     @Get('notification')
     @Roles('Organization')
@@ -155,6 +176,26 @@ import {
       
       return this.organizationService.getNotifications(user.id);
     }
+
+    // ================================
+    //          Dashboard
+    // ================================
+
+    // @Get('events')
+    // @Roles('Organization')
+    // async getEvent( @Req() req: Request) {
+    //   const user = req.user as { id: number; name: string }; 
+      
+    //   return this.organizationService.getEvent(user.id);
+    // }
+
+    @Get('dashboard')
+    @Roles('Organization')
+    async getDashboard(@Req() req: Request) {
+      const user = req.user as { id: number; name: string }; 
+      return this.organizationService.getDashboard(user.id);
+    }
+
 
 
   }

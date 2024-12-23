@@ -14,6 +14,7 @@ const typeorm_1 = require("typeorm");
 const class_validator_1 = require("class-validator");
 const user_entity_1 = require("./user.entity");
 const drive_entity_1 = require("./drive.entity");
+const event_entity_1 = require("./event.entity");
 var PartnershipStatus;
 (function (PartnershipStatus) {
     PartnershipStatus["REQUESTING"] = "requesting";
@@ -54,9 +55,13 @@ __decorate([
     __metadata("design:type", user_entity_1.User)
 ], Partnership.prototype, "guestUser", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => drive_entity_1.Drive, (drive) => drive.Partners),
+    (0, typeorm_1.OneToMany)(() => drive_entity_1.Drive, (drive) => drive.Partnership),
     __metadata("design:type", Array)
 ], Partnership.prototype, "drives", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => event_entity_1.Event, (event) => event.partnership),
+    __metadata("design:type", Array)
+], Partnership.prototype, "event", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         type: 'enum',

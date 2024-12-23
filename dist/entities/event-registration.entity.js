@@ -9,45 +9,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Contribution = exports.Type = void 0;
+exports.EventRegistration = void 0;
 const typeorm_1 = require("typeorm");
 const class_validator_1 = require("class-validator");
 const user_entity_1 = require("./user.entity");
 const event_entity_1 = require("./event.entity");
-var Type;
-(function (Type) {
-    Type["Metalic"] = "Metalic";
-    Type["Plastic"] = "Plastic";
-    Type["Paper"] = "Paper";
-})(Type || (exports.Type = Type = {}));
-let Contribution = class Contribution {
+let EventRegistration = class EventRegistration {
 };
-exports.Contribution = Contribution;
+exports.EventRegistration = EventRegistration;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Contribution.prototype, "id", void 0);
+], EventRegistration.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    (0, class_validator_1.IsEnum)(Type, {
-        message: 'Invalid Material type',
-    }),
-    __metadata("design:type", String)
-], Contribution.prototype, "materialType", void 0);
-__decorate([
-    (0, typeorm_1.Column)('float'),
-    (0, class_validator_1.IsNumber)({}, { message: 'Quantity must be a number' }),
-    __metadata("design:type", Number)
-], Contribution.prototype, "quantity", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.contributions),
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.eventRegistrations, { nullable: false }),
+    (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", user_entity_1.User)
-], Contribution.prototype, "contributor", void 0);
+], EventRegistration.prototype, "user", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => event_entity_1.Event, (event) => event.contributions),
+    (0, typeorm_1.ManyToOne)(() => event_entity_1.Event, (event) => event.registrations, { nullable: false }),
+    (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", event_entity_1.Event)
-], Contribution.prototype, "event", void 0);
-exports.Contribution = Contribution = __decorate([
+], EventRegistration.prototype, "event", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: false }),
+    (0, class_validator_1.IsEnum)([true, false], { message: 'Check-in status must be a boolean value' }),
+    __metadata("design:type", Boolean)
+], EventRegistration.prototype, "checkedIn", void 0);
+__decorate([
+    (0, typeorm_1.CreateDateColumn)(),
+    __metadata("design:type", Date)
+], EventRegistration.prototype, "registrationDate", void 0);
+exports.EventRegistration = EventRegistration = __decorate([
     (0, typeorm_1.Entity)()
-], Contribution);
-//# sourceMappingURL=contribution.entity.js.map
+], EventRegistration);
+//# sourceMappingURL=event-registration.entity.js.map

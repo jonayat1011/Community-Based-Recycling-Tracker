@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RecyclingCenter = void 0;
 const typeorm_1 = require("typeorm");
 const class_validator_1 = require("class-validator");
+const event_entity_1 = require("./event.entity");
 let RecyclingCenter = class RecyclingCenter {
 };
 exports.RecyclingCenter = RecyclingCenter;
@@ -54,6 +55,11 @@ __decorate([
     (0, class_validator_1.IsNumber)({}, { message: 'Longitude must be a number' }),
     __metadata("design:type", Number)
 ], RecyclingCenter.prototype, "longitude", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => event_entity_1.Event, (event) => event.drive),
+    (0, typeorm_1.JoinColumn)(),
+    __metadata("design:type", event_entity_1.Event)
+], RecyclingCenter.prototype, "event", void 0);
 exports.RecyclingCenter = RecyclingCenter = __decorate([
     (0, typeorm_1.Entity)()
 ], RecyclingCenter);

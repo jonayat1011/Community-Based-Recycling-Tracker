@@ -18,6 +18,7 @@ const event_entity_1 = require("./event.entity");
 var DriveStatus;
 (function (DriveStatus) {
     DriveStatus["PENDING"] = "pending";
+    DriveStatus["APPROVED"] = "Approved";
     DriveStatus["ONGOING"] = "ongoing";
     DriveStatus["COMPLETED"] = "completed";
     DriveStatus["DECLINED"] = "declined";
@@ -62,7 +63,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.ManyToOne)(() => partnership_entity_1.Partnership, (partnership) => partnership.drives),
     __metadata("design:type", partnership_entity_1.Partnership)
-], Drive.prototype, "Partners", void 0);
+], Drive.prototype, "Partnership", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         type: 'enum',

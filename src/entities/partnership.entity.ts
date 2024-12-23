@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'ty
 import { IsDate, IsString, Length, IsEnum } from 'class-validator';
 import { User } from './user.entity';
 import { Drive } from './drive.entity';
+import { Event } from './event.entity';
 
 // Enum for status
 export enum PartnershipStatus {
@@ -36,8 +37,11 @@ export class Partnership {
   @ManyToOne(() => User, (user) => user.partnerships)
   guestUser: User;
 
-  @OneToMany(() => Drive, (drive) => drive.Partners)
+  @OneToMany(() => Drive, (drive) => drive.Partnership)
   drives: Drive[];
+
+  @OneToMany(() => Event, (event) => event.partnership)
+  event: Event[];
 
   @Column({
     type: 'enum',

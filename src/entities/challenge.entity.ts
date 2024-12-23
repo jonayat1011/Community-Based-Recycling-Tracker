@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from 'typeorm';
 import { IsString, Length, IsDateString, IsNumber } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ChallengeParticipation } from './challenge-participation.entity';
-
+import { Event } from './event.entity';
 @Entity()
 export class Challenge {
   @PrimaryGeneratedColumn()
@@ -36,4 +36,8 @@ export class Challenge {
     (participation) => participation.challenge,
   )
   participations: ChallengeParticipation[];
+
+    @OneToMany(() => Event, (event) => event.challenge)
+    @JoinColumn() 
+    event: Event;
 }

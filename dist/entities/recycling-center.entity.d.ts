@@ -1,3 +1,4 @@
+import { Event } from './event.entity';
 export declare class RecyclingCenter {
     id: number;
     name: string;
@@ -6,4 +7,5 @@ export declare class RecyclingCenter {
     website: string;
     latitude: number;
     longitude: number;
+    event: Event;
 }

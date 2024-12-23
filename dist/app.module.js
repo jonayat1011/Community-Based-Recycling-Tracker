@@ -26,6 +26,8 @@ const organization_module_1 = require("./organization/organization.module");
 const user_service_1 = require("./user/user.service");
 const user_module_1 = require("./user/user.module");
 const auth_module_1 = require("./auth/auth.module");
+const event_registration_entity_1 = require("./entities/event-registration.entity");
+const schedule_1 = require("@nestjs/schedule");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -39,12 +41,13 @@ exports.AppModule = AppModule = __decorate([
                 username: 'postgres',
                 password: '@1545',
                 database: 'community_recycling',
-                entities: [user_entity_1.User, drive_entity_1.Drive, reward_entity_1.Reward, resource_entity_1.Resource, recycling_center_entity_1.RecyclingCenter, partnership_entity_1.Partnership, event_entity_1.Event, contribution_entity_1.Contribution, challenge_entity_1.Challenge, challenge_participation_entity_1.ChallengeParticipation, notification_entity_1.Notification],
+                entities: [user_entity_1.User, drive_entity_1.Drive, reward_entity_1.Reward, resource_entity_1.Resource, recycling_center_entity_1.RecyclingCenter, partnership_entity_1.Partnership, event_entity_1.Event, contribution_entity_1.Contribution, challenge_entity_1.Challenge, challenge_participation_entity_1.ChallengeParticipation, notification_entity_1.Notification, event_registration_entity_1.EventRegistration],
                 synchronize: true,
             }),
             organization_module_1.OrganizationModule,
             user_module_1.UserModule,
-            auth_module_1.AuthModule
+            auth_module_1.AuthModule,
+            schedule_1.ScheduleModule.forRoot()
         ],
         controllers: [app_controller_1.AppController,],
         providers: [app_service_1.AppService, user_service_1.UserService,],

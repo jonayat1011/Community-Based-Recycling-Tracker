@@ -4,9 +4,10 @@ import { User } from './user.entity';
 import { Partnership } from './partnership.entity';
 import { Event } from './event.entity';
 
-// Enum for Drive status
+
 export enum DriveStatus {
   PENDING = 'pending',
+  APPROVED  = 'Approved',
   ONGOING = 'ongoing',
   COMPLETED = 'completed',
   DECLINED = 'declined',
@@ -42,7 +43,7 @@ export class Drive {
   organizer: User;
 
   @ManyToOne(() => Partnership, (partnership) => partnership.drives)
-  Partners: Partnership;
+  Partnership: Partnership;
 
   @Column({
     type: 'enum',

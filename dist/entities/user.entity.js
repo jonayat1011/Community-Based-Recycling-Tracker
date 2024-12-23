@@ -17,6 +17,7 @@ const partnership_entity_1 = require("./partnership.entity");
 const contribution_entity_1 = require("./contribution.entity");
 const event_entity_1 = require("./event.entity");
 const notification_entity_1 = require("./notification.entity");
+const event_registration_entity_1 = require("./event-registration.entity");
 let User = class User {
 };
 exports.User = User;
@@ -73,6 +74,10 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => notification_entity_1.Notification, (notification) => notification.fromUser),
     __metadata("design:type", Array)
 ], User.prototype, "notifications", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => event_registration_entity_1.EventRegistration, (registration) => registration.user),
+    __metadata("design:type", Array)
+], User.prototype, "eventRegistrations", void 0);
 exports.User = User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);

@@ -3,6 +3,7 @@ import { Partnership } from './partnership.entity';
 import { Event } from './event.entity';
 export declare enum DriveStatus {
     PENDING = "pending",
+    APPROVED = "Approved",
     ONGOING = "ongoing",
     COMPLETED = "completed",
     DECLINED = "declined"
@@ -15,7 +16,7 @@ export declare class Drive {
     startDate: Date;
     endDate: Date;
     organizer: User;
-    Partners: Partnership;
+    Partnership: Partnership;
     status: DriveStatus;
     event: Event;
 }
